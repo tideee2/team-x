@@ -1,0 +1,15 @@
+Server is listening at port 2222
+Server ip :0.0.0.0
+Server is IP4/IP6 : IPv4
+2018-4-16 23:33:47: Data received from client : hello hello hello
+Received 17 bytes from 127.0.0.1:57012
+
+Data sent !!!
+2018-4-16 23:33:52: Data received from client : hello hello hello
+Received 17 bytes from 127.0.0.1:57013
+
+Data sent !!!
+2018-4-16 23:34:12: Data received from client : privet, pacani
+Received 14 bytes from 127.0.0.1:57016
+
+Data sent !!!
