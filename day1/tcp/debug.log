@@ -1,0 +1,21 @@
+Server listening on : 2222
+2018-4-17 0:53:8: ip: ::ffff:127.0.0.1 message: Privetiki-pistoletiki
+2018-4-17 0:53:8 ip: ::ffff:127.0.0.1 disconnect
+2018-4-17 0:53:9: ip: ::ffff:127.0.0.1 message: Privetiki-pistoletiki
+2018-4-17 0:53:9 ip: ::ffff:127.0.0.1 disconnect
+2018-4-17 0:53:35: ip: ::ffff:127.0.0.1 message: hello hell hel he l o
+2018-4-17 0:53:35 ip: ::ffff:127.0.0.1 disconnect
+2018-4-17 0:53:38: ip: ::ffff:127.0.0.1 message: hello hell hel he l o
+2018-4-17 0:53:38 ip: ::ffff:127.0.0.1 disconnect
+2018-4-17 0:53:45: ip: ::ffff:127.0.0.1 message: GET / HTTP/1.1
+Host: 127.0.0.1:2222
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,uk;q=0.6
+
+
+2018-4-17 0:53:55: ip: ::ffff:127.0.0.1 message: hello hell hel he l o
+2018-4-17 0:53:55 ip: ::ffff:127.0.0.1 disconnect
