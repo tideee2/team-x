@@ -1,0 +1,137 @@
+header,
+section,
+footer{
+    width: 960px;
+    margin: 0 auto;
+}
+body{
+    background: #f0f0f0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #878787;
+}
+a{
+    text-decoration: none;
+}
+nav a{
+    color: #878787;
+    text-transform: uppercase;
+}
+nav a:hover{
+    text-decoration: underline;
+}
+a.active{
+    color: #ad6069;
+}
+p{
+}
+header{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding:28px 0;
+}
+nav{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    margin-top: 23px;
+}
+nav a{
+    margin-left: 15px;
+    font-size: 12px;
+}
+#top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-top: 1px solid #e2e2e2;
+    border-bottom: 1px solid #e2e2e2;
+}
+.top-text{
+    width: 720px;
+    font-size: 22px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    border-right:1px solid #e2e2e2;
+}
+
+#top .social{
+    width: 240px;
+    padding-left: 28px;
+    margin-left: 10px;
+    box-sizing: border-box;
+}
+.social p{
+    color: #222222;
+    margin-top: 20px;
+}
+.social-buttons{
+    padding: 0;
+}
+.social-buttons li{
+    list-style-type: none;
+    display: inline-block;  
+}
+.social-buttons a:hover{
+    opacity: 0.7;
+}
+#content{
+    display: flex;
+/* ,flex-direction: row; */
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.card{
+    flex: 1 0 auto;
+    width: 20%;
+    height: 225px;
+    box-sizing: border-box;
+    margin-left: 0;
+    flex-grow: 1;
+}
+.card img{
+    height: 185px;
+}
+.card figcaption{
+    height: 40px;
+}
+@media all and (max-width: 800px) {
+    header {
+      justify-content: space-around;
+      flex-direction: column;
+      text-align: center;
+    }
+    nav{
+        justify-content: center;
+    }
+    #content{
+        justify-content: flex-start;
+        text-align: center;
+    }
+    .card{
+        width: 25%;
+    }
+  }
+@media all and (max-width: 600px) {
+nav {
+    -webkit-flex-flow: column wrap;
+    flex-flow: column wrap;
+    padding: 0;
+}
+
+nav a { 
+    text-align: center; 
+    padding: 10px;
+    border-top: 1px solid rgba(255,255,255,0.3); 
+    border-bottom: 1px solid rgba(0,0,0,0.1); 
+}
+#content{
+}
+.card{
+    width:40%;
+}
+}
