@@ -6,7 +6,6 @@ function LRU(){
         
         if (this.list.length == 0){
             this.list.push({val: value, freq:1});
-            this.size++;
         }
         else{
             var temp = this.list[this.list.findIndex(function(x){
@@ -19,7 +18,6 @@ function LRU(){
                 }
                 else{
                     this.list.push({val: value, freq:1});
-                    this.size++; 
                 }
             }
             else{
