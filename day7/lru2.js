@@ -3,9 +3,6 @@ function LRU(){
     this.limit = 5;
     this.size = 0;
     this.set = function(value){
-        // this.list.push({val: value, freq:1});
-
-   // console.log(this.list);
         
         if (this.list.length == 0){
             this.list.push({val: value, freq:1});
@@ -50,12 +47,10 @@ function LRU(){
     }
     this.printList = function(){
         let s='';
-        //console.log(this.list);
         for(let i = 0; i < this.list.length; i++){
             s+=this.list[i].val+':'+this.list[i].freq+'\n';
         }
         console.log(s+'---\n');
-       // return this.list;
 
     }
     this.find = function(value){
@@ -63,8 +58,6 @@ function LRU(){
             return x.val == value;
         })]);
     }
-    
-    //return this;
 }
 
 x = new LRU();
