@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="qq">hello</h1>
+    <ul>
+        <li class="ww">text</li>
+        <li class="ww">text</li>
+        <li class="ww">text</li>
+        <li class="ww">text</li>
+        <li class="ww">text</li>
+    </ul>
+    <p>press f12, go to the console</p>
+    <script>
+        console.log('use $("#qq").html(), or $(".ww").html() or $("li").html() to see content');
+        console.log('or use $("#qq").html("privet"), or $(".ww").html("privet") or $("li").html("privet") to change content');
+
+        window.$ = function(param){
+            if (param[0] == '#'){
+                var el = document.getElementById(param.slice(1));
+            }
+            else if (param[0] == '.'){
+                var el = document.getElementsByClassName(param.slice(1));
+            }
+            else {
+                var el = document.getElementsByTagName(param);
+            }
+            console.log(el);
+
+        this.html = function (data){
+            if (data == undefined){
+                if (el.length != undefined){
+                    var s='';
+                    for (i = 0; i < el.length;i++){
+                        s+=el[i].innerHTML;
+                    }
+                    return s;
+                }  
+                else return el.innerHTML
+            }
+            else{
+                if (el.length != undefined){
+                    var s='';
+                    for (i = 0; i < el.length;i++){
+                        el[i].innerHTML = data;
+                    }
+                }  
+                else
+                el.innerHTML = data;
+            }
+        }
+        return this;
+    }
+    </script>
+</body>
+</html>

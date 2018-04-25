@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      #messages { list-style-type: none; margin: 0; padding: 0; margin-bottom:80px;overflow-x: auto }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+      #typing{position:fixed;bottom:50px;}
+    </style>
+  </head>
+  <script src="/socket.io/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+  $(function () {
+    var userName = '';
+    $('#login-form').show();
+    $('#chat-room').hide();
+    $('#log-button').click(function(){
+      $('#login-form').hide();
+      $('#chat-room').show();
+    $('#m').bind('keydown', function(e){
+
+     if(e.which  == 13){
+        socket.emit('stop typing'); 
+        console.log('rrr');
+      }
+      else{
+        socket.emit('user typing', JSON.stringify({user: userName}));
+      }
+      console.log(e.key);
+    });
+    userName =  $('#login').val();
+      var
+      mess={
+        user: userName
+      }
+
+    socket.emit('user connected', JSON.stringify(mess)); 
+      console.log(mess);
+    })
+    var socket = io();
+    $('form').submit(function(){
+      var
+        mess = {
+          user: userName,
+          text: $('#m').val()
+        }
+      socket.emit('chat message', JSON.stringify(mess));
+      $('#m').val('');
+      return false;
+    });
+    socket.on('chat message', function(msg){
+      $('#messages').append($('<li>').text(JSON.parse(msg).user + ': '+JSON.parse(msg).text));
+    });
+    socket.on('user connected', function(msg){
+      $('#messages').append($('<li>').text(JSON.parse(msg).user + ' connected'));
+    });
+    socket.on('user typing', function(msg){
+      $('#typing').text(JSON.parse(msg).user + ' typing');
+    });
+    socket.on('stop typing', function(msg){console.log('2222');
+      $('#typing').empty();
+    });
+      });
+</script>
+  <body>
+    <div id="main">
+      <div id="login-form">
+        <input type="text" id="login" name="login">
+        <button id="log-button">login</button>
+      </div>
+      <div id="chat-room">
+        <ul id="messages"></ul>
+        <p id="typing"></p>
+        <form action="">
+          <input id="m" autocomplete="off" /><button>Send</button>
+        </form>
+    </div>
+  </div>
+  </body>
+</html>
