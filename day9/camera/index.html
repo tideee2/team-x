@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+     #main{
+        width:400px;
+        height:400px;
+        margin:20% auto;
+    }
+    </style>
+  </head>
+  <body>
+    
+    <div id="main">
+        <span id="mess"></span>
+        <button id="click">Click me</button>
+        <span id="counter">counter</span>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      $(function () {   
+        var socket = io();
+        $('#click').attr('disabled','disabled');
+    socket.on('waiting', function(msg){
+      $('#mess').text(msg); 
+    });
+    
+    socket.on('stop control', function(){
+        $('#mess').text("stop control, waiting");
+        $('#click').attr('disabled','disabled');
+    });
+    socket.on('start control', function () {
+        $('#mess').text("take control");
+        $('#click').removeAttr('disabled');
+            console.log('qq');
+    });
+    $('#click').click(function(){
+            socket.emit('count');
+            console.log('ww');
+        });
+    socket.on('count up',function(msg){
+        console.log(msg);
+        $('#counter').text('counter '+msg);
+    });
+      });
+    </script>
+  </body>
+</html>
