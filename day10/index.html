@@ -9,11 +9,26 @@
     <!-- <link rel="stylesheet" href="style.css"> -->
     <!-- <script src="/socket.io/socket.io.js"></script> -->
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="login.js"></script>
 </head>
 <body>
     <h1>Welcome to todolist</h1>
     <a href="list.html">demo user</a>
-    <!-- <script src="script.js"></script> -->
-
+    <a href="#" id="register-link">register</a>
+    <a href="#" id="login-link">login</a>
+    <span id="message"></span>
+    <div id="login-form">
+        <h2>Login form</h2>
+        name<input type="text" name="name" id="name">
+        pass <input type="pass" name="pass" id="pass">
+        <button id="login-button">ok</button>
+    </div>   
+    <div id="register-form">
+        <h2>Register form</h2>
+        name<input type="text" name="name" id="reg-name">
+        pass <input type="pass" name="pass" id="reg-pass1">
+        repeat pass <input type="pass" name="pass" id="reg-pass2">
+        <button id="register-button">ok</button>
+    </div>
 </body>
 </html>

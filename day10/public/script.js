@@ -1,4 +1,14 @@
+var userId = getCookie('id');
+
 $(function () {  
+    if (getCookie('status') != 'ok'){
+        $('#message').text('errorr');
+        setTimeout(() => {
+            window.location.href = '/';
+        }, 3000); 
+    }
+    var name=getCookie('name');
+    $('#greet').text('Hello ' + name);
     //var socket = io();
     // socket.on('stop control', function(){
     //     $('#mess').text("stop control, waiting");
@@ -8,15 +18,19 @@ $(function () {
     //     socket.emit('count');
     //     console.log('ww');
     // });
-    getTasks(1);
-    
+    getTasks(userId);
+    $('#logout').click(function(){
+        document.cookie = "name=; path=/;expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+        document.cookie = "id=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+        document.cookie = "status=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+    });
 });
 
 function getTasks(){
     $.ajax({
         type: "post",
         url: "/api/tasks",
-        data: JSON.stringify({id:1}),
+        data: JSON.stringify({id:userId}),
         dataType: "json",
         contentType: "application/json",
         success: function(data){ 
@@ -81,7 +95,8 @@ $(document).on('keypress', '#todo-enter',(e)=>{
               contentType: "application/json",
               method: "post",
               data: JSON.stringify({
-                    text: $('#todo-enter').val()
+                    text: $('#todo-enter').val(),
+                    id : userId
                 }),
                 success: function (data) {
                     console.log(data);
@@ -98,6 +113,8 @@ $(document).on('keypress', '#todo-enter',(e)=>{
     }
 });
 function changeTask(el,id,status,text,x){
+    //if x == 1 change text of task
+    //if x == 2 change status of task
         $.ajax({
           url: "api/tasks",
           contentType: "application/json",
@@ -116,4 +133,11 @@ function changeTask(el,id,status,text,x){
                     console.log('error');
                 }
     });
+}
+function getCookie(name) {
+
+    var matches = document.cookie.match(new RegExp(
+      "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ))
+    return matches ? decodeURIComponent(matches[1]) : undefined
 }

@@ -1,3 +1,4 @@
+
 var express = require("express");
 var bodyParser = require("body-parser");
 var jsonParser = bodyParser.json();
@@ -35,6 +36,51 @@ app.get('/list',   (request, response)=>{
 app.get("/", function(request, response){
 	response.sendFile(__dirname + "/index.html");
 });
+app.get("/index.html", function(request, response){
+	response.sendFile(__dirname + "/index.html");
+});
+app.post("/api/users", jsonParser, function(request, response){
+    let name = request.body.name;
+    let pass = request.body.pass;
+    console.log(request.body);
+    var query = "SELECT * FROM users WHERE `name`='"+name+"'";
+    console.log(query);
+    connection.query(query, function(err, rows) {
+        if (err) {throw err;response.send({status: 'login fail'});}
+        console.log(rows.length);
+        if (rows.length > 0){
+        if (pass == rows[0].password){
+            rows[0].status = 'ok';
+            response.send(rows[0]);    
+        }
+        else response.send({status:'incorrect password'});
+        }
+        else response.send({status: 'user doesnt exist'})
+    });
+});
+app.post("/api/adduser",jsonParser, (request,response)=>{
+    let name = request.body.name || 'noname';
+    let pass = request.body.pass;
+    console.log(request.body);
+    var query = "SELECT * FROM users WHERE `name`='"+name+"'";
+    console.log(query);
+    connection.query(query, function(err, rows) {
+        if (err) {throw err;response.send({status: 'register fail'});}
+        if (rows.length > 0){
+            response.send({status: 'that user exist'})
+        }
+        else{
+            var query2 = "INSERT INTO users (name, password) VALUES ('"+name+"','"+pass+"')";
+            console.log(query2);
+            connection.query(query2, function(err, rows) {
+                if (err) {throw err;response.send({status: 'register fail'});}
+                console.log(rows);
+                response.send({status: 'register ok'});
+
+            });
+        }
+    });
+});
 app.post("/api/tasks",jsonParser,(request,response)=>{
     console.log('111');
     console.log((request.body.id));
@@ -57,6 +103,7 @@ app.delete("/api/tasks/:id",(request, response)=>{
 })
 app.put("/api/tasks", jsonParser, function(request, response){
     if(!request.body) return response.sendStatus(400);
+    console.log(request.body);
     let id = request.body.id;
     let text = request.body.x==1 ? '`text`="'+request.body.text+'"' : '';
     let status = request.body.x==2 ? '`status`="'+request.body.status+'"': '';
@@ -71,7 +118,7 @@ app.put("/api/tasks", jsonParser, function(request, response){
 app.post("/api/addtask",function(request, response){
     console.log(request.body.text);
     let query = "INSERT INTO `" + tableName + "` (text, status, owner)"+
-    "VALUES ('" + request.body.text + "',1,1)";
+    " VALUES ('" + request.body.text + "',1,'"+request.body.id+"')";
     console.log(query);
     connection.query(query, function(err, rows) {
         if (err) throw err;
